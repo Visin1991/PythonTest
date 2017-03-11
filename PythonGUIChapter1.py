@@ -23,6 +23,27 @@ fDir = path.dirname('C:/Users/ZHU/Desktop/PythonPy/PythonTest/PythonTest')
 netDir = fDir + '/Backup'
 if not path.exists(netDir) :
 	makedirs(netDir,exist_ok=True)
+	
+	
+from socketserver import BaseRequestHandler, TCPServer
+'''
+One way to implement a TCP server in Python is to inherit from the socketserver module.
+We subclass BaseRequestHandler and then override the inherited handle method. In very
+few lines of Python code, we can implement a TCP server module.
+'''
+class RequestHandler(BaseRequestHandler):
+	#override base class handle method
+	def handle(self):
+		print('Server connected to : ',self.client_address)
+		while True:
+			rsp = self.request.recv(512)
+			if not rsp: break
+			print("Server Send Data")
+			self.request.send(b'Server received: '+rsp)
+			
+def startServer():
+	serv = TCPServer(('',24000),RequestHandler) #empty single quotes are a short cut for passing in localhost, which is our own PC. This is the IP address of 127.0.0.1.
+	serv.serve_forever()
 
 class TkinterChapter1():
 	 #Create a instance
@@ -32,6 +53,8 @@ class TkinterChapter1():
 		self.win.resizable(0,0)                       #disable resize
 		self.createWidgets()
 		self.defaultFileEntries()
+		svrT = Thread(target=startServer,daemon=True)
+		svrT.start()
 	
 	def defaultFileEntries(self):
 		self.fileEntry.delete(0,tk.END)
