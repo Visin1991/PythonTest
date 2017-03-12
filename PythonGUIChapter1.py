@@ -27,9 +27,11 @@ if not path.exists(netDir) :
 	
 from socketserver import BaseRequestHandler, TCPServer
 '''
-One way to implement a TCP server in Python is to inherit from the socketserver module.
-We subclass BaseRequestHandler and then override the inherited handle method. In very
-few lines of Python code, we can implement a TCP server module.
+    The RequestHandler class for our server.
+
+    It is instantiated once per connection to the server, and must
+    override the handle() method to implement communication to the
+    client.
 '''
 class RequestHandler(BaseRequestHandler):
 	#override base class handle method
@@ -96,7 +98,7 @@ class TkinterChapter1():
 	def ClickMe(self):
 		self.buttonA.configure(text='Hello' + self.name.get())
 		print(self)
-		WTQ.writeToScrol(self)
+		WTQ.writeToScrol(self) 
 		
 	#Create Spinbox
 	def _spin(self):
