@@ -33,11 +33,13 @@ if __name__ == '__main__':
 	thread.start()
 	rest = bytes()
 	addr = sock.getsockname()
+	
+	print('Connected to {}:{}'.format(HOST,PORT))
 	#Loop indefinitely to receive message from server
 	while True:
 		try:
 			#blocks
-			(msgs,rest) = tincanchat.recv_msgs(sock,rest)
+			(msgs,rest) = tincanchat.recv_msgs(sock,rest) #When we use Q to close the Client. we Get a error
 			for msg in msgs:
 				print(msg)
 		except ConnectionError:
