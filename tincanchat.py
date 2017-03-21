@@ -1,6 +1,6 @@
 #tincanchat
 import socket
-HOST = ''
+HOST = '127.0.0.1'
 PORT = 4040
 
 def create_listen_socket(host, port):

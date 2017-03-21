@@ -5,7 +5,8 @@
 import sys,socket,threading
 import tincanchat
 
-HOST = sys.argv[-1] if len(sys.argv) > 1 else '127.0.0.1'
+#HOST = sys.argv[-1] if len(sys.argv) > 1 else '127.0.0.1'
+HOST = tincanchat.HOST
 PORT = tincanchat.PORT
 
 def handle_input(sock):
